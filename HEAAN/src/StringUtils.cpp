@@ -83,11 +83,11 @@ void StringUtils::compare(double* vals1, double* vals2, long size, string prefix
 
 void StringUtils::compare(complex<double>* vals1, complex<double>* vals2, long size, string prefix) {
 	for (long i = 0; i < size; ++i) {
-		cout << "---------------------" << endl;
-		cout << "m" + prefix + ": " << i << " :" << vals1[i] << endl;
-		cout << "d" + prefix + ": " << i << " :" << vals2[i] << endl;
-		cout << "e" + prefix + ": " << i << " :" << (vals1[i]-vals2[i]) << endl;
-		cout << "---------------------" << endl;
+		//cout << "---------------------" << endl;
+		//cout << "m" + prefix + ": " << i << " :" << vals1[i] << endl;
+		//cout << "d" + prefix + ": " << i << " :" << vals2[i] << endl;
+		cout << "e" + prefix + ": " << i << " : " << floor(-log2(abs(vals1[i]-vals2[i]))) << " bits" << endl;
+		//cout << "---------------------" << endl;
 	}
 }
 

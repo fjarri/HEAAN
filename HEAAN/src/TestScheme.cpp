@@ -236,6 +236,9 @@ void TestScheme::testConjugate(long logq, long logp, long logn) {
 	Ciphertext cipher;
 	scheme.encrypt(cipher, mvec, n, logp, logq);
 
+	complex<double>* dvec = scheme.decrypt(secretKey, cipher);
+	StringUtils::compare(mvec, dvec, n, "original");
+
 	timeutils.start("Conjugate");
 	scheme.conjugateAndEqual(cipher);
 	timeutils.stop("Conjugate");
