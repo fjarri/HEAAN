@@ -6,6 +6,8 @@
 * work.  If not, see <http://creativecommons.org/licenses/by-nc/3.0/>.
 */
 
+#include <NTL/ZZ.h>
+
 #include "BootContext.h"
 #include "Ring.h"
 #include "RingMultiplier.h"

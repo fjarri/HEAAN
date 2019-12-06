@@ -15,6 +15,22 @@
 using namespace std;
 using namespace NTL;
 
+
+struct MyRNG
+{
+    uint64_t state;
+
+    MyRNG(uint64_t seed) : state(seed)
+    {
+    }
+};
+
+uint64_t myrand();
+double myrand_float();
+long myrand_long(long lim);
+ZZ myRandomBits_ZZ(long len);
+long myRandomBits_long(long len);
+
 class EvaluatorUtils {
 public:
 

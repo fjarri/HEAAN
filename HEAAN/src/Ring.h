@@ -14,6 +14,7 @@
 #include <map>
 #include "BootContext.h"
 #include "RingMultiplier.h"
+#include "EvaluatorUtils.h"
 
 using namespace std;
 using namespace NTL;

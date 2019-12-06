@@ -77,6 +77,31 @@ void Scheme::addMultKey(SecretKey& secretKey) {
 	}
 }
 
+
+
+ZZ mysum(ZZ* arr, long n)
+{
+	ZZ a = to_ZZ(0);
+	for (int i = 0; i < n; i++)
+	{
+		a += arr[i];
+	}
+	return a;
+}
+
+uint64_t mysum(uint64_t* arr, long n)
+{
+	uint64_t a = 0;
+	for (int i = 0; i < n; i++)
+	{
+		a += arr[i];
+	}
+	return a;
+}
+
+
+
+
 void Scheme::addConjKey(SecretKey& secretKey) {
 	ZZ* ax = new ZZ[N];
 	ZZ* bx = new ZZ[N];

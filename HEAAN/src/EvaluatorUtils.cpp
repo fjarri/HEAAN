@@ -12,13 +12,92 @@
 #include <cstdlib>
 
 
+static MyRNG RNG(12345);
+
+
+uint64_t myrand()
+{
+    uint64_t x = RNG.state; // The state must be seeded with a nonzero value
+    x ^= (x >> 12);
+    x ^= (x << 25);
+    x ^= (x >> 27);
+    RNG.state = x;
+    return x * 0x2545F4914F6CDD1D;
+}
+
+
+double myrand_float()
+{
+    uint64_t r = myrand();
+    return (double(r) / 18446744073709551616.);
+}
+
+
+long myrand_long(long lim)
+{
+    return long(myrand() % lim);
+}
+
+
+ZZ myRandomBits_ZZ(long len)
+{
+    ZZ res(0);
+    int shift = 0;
+    while (true)
+    {
+        uint64_t u64 = myrand();
+        int bitlen = len > 64 ? 64 : len;
+        for (int i = 0; i < bitlen; i++)
+        {
+            if (u64 & (uint64_t(1) << i))
+            {
+                res += power2_ZZ(shift + i);
+            }
+        }
+        shift += 64;
+        len -= 64;
+        if (len < 0)
+        {
+            break;
+        }
+    }
+    return res;
+}
+
+
+long myRandomBits_long(long len)
+{
+    long res = 0;
+    int shift = 0;
+    while (true)
+    {
+        uint64_t u64 = myrand();
+        int bitlen = len > 64 ? 64 : len;
+        for (int i = 0; i < bitlen; i++)
+        {
+            if (u64 & (uint64_t(1) << i))
+            {
+                res += long(1) << (shift + i);
+            }
+        }
+        shift += 64;
+        len -= 64;
+        if (len < 0)
+        {
+            break;
+        }
+    }
+    return res;
+}
+
+
 //----------------------------------------------------------------------------------
 //   RANDOM REAL AND COMPLEX NUMBERS
 //----------------------------------------------------------------------------------
 
 
 double EvaluatorUtils::randomReal(double bound)  {
-	return (double) rand()/(RAND_MAX) * bound;
+	return (double) myrand_float() * bound;
 }
 
 complex<double> EvaluatorUtils::randomComplex(double bound) {

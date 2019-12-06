@@ -8,6 +8,28 @@
 #include "SchemeAlgo.h"
 
 
+ZZ mysum3(ZZ* arr, long n)
+{
+	ZZ a = to_ZZ(0);
+	for (int i = 0; i < n; i++)
+	{
+		a += arr[i];
+	}
+	return a;
+}
+
+uint64_t mysum3(uint64_t* arr, long n)
+{
+	uint64_t a = 0;
+	for (int i = 0; i < n; i++)
+	{
+		a += arr[i];
+	}
+	return a;
+}
+
+
+
 void SchemeAlgo::powerOf2(Ciphertext& res, Ciphertext& cipher, long logp, long logDegree) {
 	res.copy(cipher);
 	for (long i = 0; i < logDegree; ++i) {

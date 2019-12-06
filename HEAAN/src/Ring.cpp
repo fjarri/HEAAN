@@ -568,8 +568,8 @@ void Ring::subFromGaussAndEqual(ZZ* res, const ZZ& q) {
 	static long bignum = 0xfffffff;
 
 	for (long i = 0; i < N; i+=2) {
-		double r1 = (1 + RandomBnd(bignum)) / ((double)bignum + 1);
-		double r2 = (1 + RandomBnd(bignum)) / ((double)bignum + 1);
+		double r1 = (1 + myrand_long(bignum)) / ((double)bignum + 1);
+		double r2 = (1 + myrand_long(bignum)) / ((double)bignum + 1);
 		double theta=2 * Pi * r1;
 		double rr= sqrt(-2.0 * log(r2)) * sigma;
 
@@ -583,8 +583,8 @@ void Ring::addGaussAndEqual(ZZ* res, const ZZ& q) {
 	static long bignum = 0xfffffff;
 
 	for (long i = 0; i < N; i+=2) {
-		double r1 = (1 + RandomBnd(bignum)) / ((double)bignum + 1);
-		double r2 = (1 + RandomBnd(bignum)) / ((double)bignum + 1);
+		double r1 = (1 + myrand_long(bignum)) / ((double)bignum + 1);
+		double r2 = (1 + myrand_long(bignum)) / ((double)bignum + 1);
 		double theta=2 * Pi * r1;
 		double rr= sqrt(-2.0 * log(r2)) * sigma;
 
@@ -595,9 +595,9 @@ void Ring::addGaussAndEqual(ZZ* res, const ZZ& q) {
 
 void Ring::sampleHWT(ZZ* res) {
 	long idx = 0;
-	ZZ tmp = RandomBits_ZZ(h);
+	ZZ tmp = myRandomBits_ZZ(h);
 	while(idx < h) {
-		long i = RandomBits_long(logN);
+		long i = myRandomBits_long(logN);
 		if(res[i] == 0) {
 			res[i] = (bit(tmp, idx) == 0) ? ZZ(1) : ZZ(-1);
 			idx++;
@@ -606,7 +606,7 @@ void Ring::sampleHWT(ZZ* res) {
 }
 
 void Ring::sampleZO(ZZ* res) {
-	ZZ tmp = RandomBits_ZZ(M);
+	ZZ tmp = myRandomBits_ZZ(M);
 	for (long i = 0; i < N; ++i) {
 		res[i] = (bit(tmp, 2 * i) == 0) ? ZZ(0) : (bit(tmp, 2 * i + 1) == 0) ? ZZ(1) : ZZ(-1);
 	}
@@ -614,6 +614,6 @@ void Ring::sampleZO(ZZ* res) {
 
 void Ring::sampleUniform2(ZZ* res, long bits) {
 	for (long i = 0; i < N; i++) {
-		res[i] = RandomBits_ZZ(bits);
+		res[i] = myRandomBits_ZZ(bits);
 	}
 }
